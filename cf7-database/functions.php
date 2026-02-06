@@ -35,7 +35,7 @@ if ( ! function_exists( 'cf7d_add_more_fields' ) ) {
 		$submission = WPCF7_Submission::get_instance();
 		// time
 		// $cf7->posted_data['submit_time'] = date_i18n('Y-m-d H:i:s');
-		$cf7->posted_data['submit_time'] = date_i18n( 'Y-m-d H:i:s', $submission->get_meta( 'timestamp' ) );
+		$cf7->posted_data['submit_time'] = get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $submission->get_meta( 'timestamp' ) ), 'Y-m-d H:i:s' );
 		// ip
 		$cf7->posted_data['submit_ip'] = $submission->get_meta( 'remote_ip' );
 		// user id
@@ -52,13 +52,17 @@ if ( ! function_exists( 'cf7d_add_more_fields' ) ) {
  * $fid: form id
  */
 if ( ! function_exists( 'cf7d_sortdata' ) ) {
-	function cf7d_sortdata( $data ) {
+	function cf7d_sortdata( $data, $entry = true ) {
 		$data_sorted = array();
 		foreach ( $data as $k => $v ) {
 			if ( ! isset( $data_sorted[ $v->data_id ] ) ) {
 				$data_sorted[ $v->data_id ] = array();
 			}
-			$data_sorted[ $v->data_id ][ $v->name ] = apply_filters( 'cf7d_entry_value', $v->value, $v->name );
+			if ( ! $entry ) {
+				$data_sorted[ $v->data_id ][ $v->name ] = apply_filters( 'cf7d_entry_value', $v->value, $v->name );
+			} else {
+				$data_sorted[ $v->data_id ][ $v->name ] = $v->value;
+			}
 		}
 
 		return $data_sorted;

@@ -1,9 +1,9 @@
 <?php
 /*
  * Plugin Name: Contact Form 7 Database Lite
- * Plugin URI: https://ninjateam.org
+ * Plugin URI: https://ninjateam.org/contact-form-7-database/
  * Description: Contact Form 7 Database is a plugin for WordPress allows you save all submitted from contact form 7 to database and display in Contact > Database menu
- * Version: 3.0.8
+ * Version: 3.0.9
  * Author: NinjaTeam
  * Author URI: http://ninjateam.org
  * Text Domain: cf7-database
@@ -23,6 +23,10 @@ if ( function_exists( 'wpcf7db_plugin_init' ) ) {
 		}
 	);
 	return;
+}
+
+if ( ! defined( 'CF7D_VERSION' ) ) {
+	define( 'CF7D_VERSION', '3.0.9' );
 }
 
 if ( ! defined( 'CF7D_PREFIX' ) ) {
@@ -46,6 +50,26 @@ if ( ! defined( 'CF7D_PLUGIN_BASENAME' ) ) {
 
 if ( ! function_exists( 'wpcf7db_plugin_init' ) ) {
 	function wpcf7db_plugin_init() {
+		if ( ! class_exists( 'WPCF7' ) ) {
+			add_action( 'admin_notices', function() {
+				?>
+				<div class="notice notice-error">
+				<p>
+					<?php
+					printf(
+						/* translators: 1: Contact Form 7, 2: Contact Form 7 Database */
+						esc_html__( 'Please activate %1$s to use %2$s.', 'cf7-database' ),
+						'<strong>Contact Form 7</strong>',
+						'<strong>Contact Form 7 Database</strong>'
+					);
+					?>
+				</p>
+				</div>
+				<?php
+			} );
+			return;
+		}
+		
 		require_once CF7D_PLUGIN_DIR . '/functions.php';
 		require_once CF7D_PLUGIN_DIR . '/frontend/init.php';
 		require_once CF7D_PLUGIN_DIR . '/frontend/save-files.php';

@@ -161,7 +161,7 @@ if ( ! function_exists( 'cf7d_custom_wp_admin_style' ) ) {
 				}
 			}
 
-			wp_enqueue_script( 'cf7d_apps_js', CF7D_PLUGIN_URL . '/admin/assets/dist/js/main.js', array(), '', true );
+			wp_enqueue_script( 'cf7d_apps_js', CF7D_PLUGIN_URL . '/admin/assets/dist/js/main.js', array(), CF7D_VERSION, true );
 			wp_localize_script(
 				'cf7d_apps_js',
 				'njt_cfd_data',
@@ -178,6 +178,8 @@ if ( ! function_exists( 'cf7d_custom_wp_admin_style' ) ) {
 					'is_rtl'                => apply_filters( 'cf7d_is_rtl', is_rtl() ),
 					'html_fields'           => apply_filters( 'cf7d_html_fields', array() ),
 					'translate'             => getTranslation(),
+					'is_reviewed'           => get_option( 'cf7db_user_reviewed' ),
+					'logo_url'              => CF7D_PLUGIN_URL . '/admin/assets/images/cf7-database-logo.png',
 				)
 			);
 			// File css of ant design.
@@ -185,13 +187,13 @@ if ( ! function_exists( 'cf7d_custom_wp_admin_style' ) ) {
 			// wp_enqueue_style( 'cf7d_apps_css_ant' );
 
 			// File css of apps.
-			wp_register_style( 'cf7d_apps_css', CF7D_PLUGIN_URL . '/admin/assets/dist/css/main.css' );
+			wp_register_style( 'cf7d_apps_css', CF7D_PLUGIN_URL . '/admin/assets/dist/css/main.css', array(), CF7D_VERSION );
 			wp_enqueue_style( 'cf7d_apps_css' );
 
 			// css for language right to left.
 			if ( is_rtl() == '1' ) {
 				// File support for language right to left.
-				wp_register_style( 'cf7d_apps_css_su_rtl', CF7D_PLUGIN_URL . '/admin/assets/css/css_support_rtl.css' );
+				wp_register_style( 'cf7d_apps_css_su_rtl', CF7D_PLUGIN_URL . '/admin/assets/css/css_support_rtl.css', array(), CF7D_VERSION );
 				wp_enqueue_style( 'cf7d_apps_css_su_rtl' );
 
 				// File for language right to left.

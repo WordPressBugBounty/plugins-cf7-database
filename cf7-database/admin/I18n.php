@@ -66,6 +66,13 @@ function getTranslation() {
 		 'ok'                  => __( 'OK', 'cf7-database' ),
 		 'delete_selected'     => __( 'Delete Selected', 'cf7-database' ),
 		 'fields'              => __( 'Fields', 'cf7-database' ),
+		 'footerText'          => __( 'We need your support to keep updating and improving the plugin. Please,', 'cf7-database' ),
+		 'reviewLink'          => __( 'help us by leaving a good review', 'cf7-database' ),
+		 'thanks'              => __( 'Thanks!', 'cf7-database' ),
+		 'thankYouText'        => __( 'Thank you for using Contact Form 7 Database from NinjaTeam', 'cf7-database' ),
+		 'docs'                => __( 'Docs', 'cf7-database' ),
+		 'support'             => __( 'Support', 'cf7-database' ),
+		 'badge'               => __( 'by NinjaTeam', 'cf7-database' ),
 	 );
 	 return $translation;
 }

@@ -258,6 +258,10 @@ if ( ! function_exists( 'cf7d_search_type_something' ) ) {
 add_action( 'wp_ajax_cf7d_delete_row', 'cf7d_delete_row' );
 if ( ! function_exists( 'cf7d_delete_row' ) ) {
 	function cf7d_delete_row() {
+		if( ! apply_filters( 'cf7db-allowed-to-delete', true ) ) {
+			wp_send_json_error( array( 'mess' => __( 'You are not allowed to delete this row.', 'cf7-database' ) ) );
+		}
+		
 		try {
 			if ( isset( $_POST['del_id'] )
 			) {
@@ -455,6 +459,33 @@ if ( ! function_exists( 'cf7d_edit_setting' ) ) {
 					array(
 						'error' => $ex,
 					),
+				)
+			);
+		}
+	}
+}
+// Handle review tracking
+add_action( 'wp_ajax_cf7db_review', 'cf7db_handle_review_tracking' );
+if ( ! function_exists( 'cf7db_handle_review_tracking' ) ) {
+	function cf7db_handle_review_tracking() {
+		try {
+			cf7d_checkNonce();
+			
+			// Save review tracking to option
+			$review_date = time();
+			update_option( 'cf7db_user_reviewed', true );
+			update_option( 'cf7db_review_date', $review_date );
+			
+			wp_send_json_success(
+				array(
+					'message' => __( 'Thank you for your review!', 'cf7-database' ),
+				)
+			);
+		} catch ( Exception $ex ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Error', 'cf7-database' ),
+					'error'   => $ex->getMessage(),
 				)
 			);
 		}

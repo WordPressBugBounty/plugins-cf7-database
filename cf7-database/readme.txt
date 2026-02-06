@@ -3,8 +3,8 @@ Contributors: ninjateam
 Donate link: https://ninjateam.org/contact-form-7-database/
 Tags: contact form 7, database, contact, contact form, db, form, save data
 Requires at least: 3.5
-Tested up to: 6.5
-Stable tag: 3.0.8
+Tested up to: 6.8
+Stable tag: 3.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -118,6 +118,11 @@ You’re done. Enjoy.
 3. Contact form 7 data display option
 
 == Changelog ==
+
+= Oct 14, 2025 - Version 3.0.9 =
+- Added: Documentation and Support link
+- Improved: UI
+- Fixed: Table scrolling
 
 = Mar 22, 2024 - Version 3.0.8 =
 - Fixed: Change text-domain
