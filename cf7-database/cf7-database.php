@@ -1,9 +1,9 @@
 <?php
 /*
  * Plugin Name: Contact Form 7 Database Lite
- * Plugin URI: https://ninjateam.org/contact-form-7-database/
+ * Plugin URI: http://ninjateam.org
  * Description: Contact Form 7 Database is a plugin for WordPress allows you save all submitted from contact form 7 to database and display in Contact > Database menu
- * Version: 3.0.9
+ * Version: 3.1.0
  * Author: NinjaTeam
  * Author URI: http://ninjateam.org
  * Text Domain: cf7-database
@@ -26,7 +26,7 @@ if ( function_exists( 'wpcf7db_plugin_init' ) ) {
 }
 
 if ( ! defined( 'CF7D_VERSION' ) ) {
-	define( 'CF7D_VERSION', '3.0.9' );
+	define( 'CF7D_VERSION', '3.1.0' );
 }
 
 if ( ! defined( 'CF7D_PREFIX' ) ) {

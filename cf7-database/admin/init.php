@@ -210,7 +210,11 @@ if ( ! function_exists( 'cf7d_custom_wp_admin_style' ) ) {
 add_action( 'admin_menu', 'cf7d_register_custom_submenu_page' );
 if ( ! function_exists( 'cf7d_register_custom_submenu_page' ) ) {
 	function cf7d_register_custom_submenu_page() {
-		$GLOBALS['njt_cf7d_hook_suffix'] = add_submenu_page( 'wpcf7', 'Database', 'Database', apply_filters( 'cf7d_options_page_capabilities', 'manage_options' ), 'cf7-data', 'cf7d_custom_submenu_page_callback' );
+		global $admin_page_hooks;
+		// Contact Form 7 6.2+ renamed its top-level menu slug to 'wpcf7-dashboard'.
+		$parent_slug = isset( $admin_page_hooks['wpcf7-dashboard'] ) ? 'wpcf7-dashboard' : 'wpcf7';
+
+		$GLOBALS['njt_cf7d_hook_suffix'] = add_submenu_page( $parent_slug, 'Database', 'Database', apply_filters( 'cf7d_options_page_capabilities', 'wpcf7_read_contact_forms' ), 'cf7-data', 'cf7d_custom_submenu_page_callback' );
 	}
 }
 
